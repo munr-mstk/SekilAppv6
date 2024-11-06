@@ -1,0 +1,1 @@
+[{"type":"Kare","boyut":3,"sembol":"*"},{"type":"Kare","boyut":18,"sembol":"*"},{"type":"Daire","cap":11,"sembol":"*"}]
