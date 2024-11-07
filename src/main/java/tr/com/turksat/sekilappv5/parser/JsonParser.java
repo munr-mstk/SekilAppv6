@@ -1,12 +1,9 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.parser;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 
 public class JsonParser {

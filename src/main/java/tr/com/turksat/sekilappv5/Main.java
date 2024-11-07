@@ -1,14 +1,19 @@
 package tr.com.turksat.sekilappv5;
 
+import tr.com.turksat.sekilappv5.io.OkumaYazma;
+import tr.com.turksat.sekilappv5.manager.FileManager;
+import tr.com.turksat.sekilappv5.manager.InputManager;
+import tr.com.turksat.sekilappv5.manager.OutputManager;
+import tr.com.turksat.sekilappv5.sekiller.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.InputMismatchException;
 
 public class Main {
-
-
-    private static  String java_calismalarim;
-
+    private static String java_calismalarim;
     private static List<Sekil> sekilListesi = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -21,39 +26,34 @@ public class Main {
             // Değerleri oku
             java_calismalarim = properties.getProperty("data.file.path");
 
-
-
             // Değerleri kullan
-            System.out.println("Dosya Adı: " + java_calismalarim);
+            OutputManager.print("Dosya Adı: " + java_calismalarim);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
-
-        Scanner scanner = new Scanner(System.in);
         Sekil seciliSekil = null;
         char sembol = '*';
 
         while (true) {
             try {
-                LogUtil.log("");
-                LogUtil.log("Seçenekler:");
-                LogUtil.log("1: Küçük Kare çiz");
-                LogUtil.log("2: İstediğin boyutta kare çiz");
-                LogUtil.log("3: Dikdörtken çiz");
-                LogUtil.log("4: Üçgen çiz");
-                LogUtil.log("5: Daire çiz");
-                LogUtil.log("6: Toplam alan ve çevre bilgilerini göster");
-                LogUtil.log("7: Alan ve çevre hesaplamalarını sıfırla");
-                LogUtil.log("8: Yeni Sembol ");
-                LogUtil.log("9: Şekilleri dosyadan oku ve listeye ekle");
-                LogUtil.log("10: Listedeki şekilleri dosyaya yaz");
-                LogUtil.log("11: Listedeki şekilleri sıfırla");
-                LogUtil.log("12: Çıkış");
-                LogUtil.log("Seçiminiz: ");
+                OutputManager.print("");
+                OutputManager.print("Seçenekler:");
+                OutputManager.print("1: Küçük Kare çiz");
+                OutputManager.print("2: İstediğin boyutta kare çiz");
+                OutputManager.print("3: Dikdörtken çiz");
+                OutputManager.print("4: Üçgen çiz");
+                OutputManager.print("5: Daire çiz");
+                OutputManager.print("6: Toplam alan ve çevre bilgilerini göster");
+                OutputManager.print("7: Alan ve çevre hesaplamalarını sıfırla");
+                OutputManager.print("8: Yeni Sembol ");
+                OutputManager.print("9: Json Şekilleri dosyadan oku ve listeye ekle");
+                OutputManager.print("10: Şekilleri dosyadan oku ve listeye ekle");
+                OutputManager.print("11: Listedeki Json şekilleri dosyaya yaz");
+                OutputManager.print("12: Çıkış");
+                OutputManager.printWithPrompt("Seçiminiz: ");
 
-                int secim = scanner.nextInt();
-                scanner.nextLine();
+                int secim = InputManager.readInt("");
 
                 switch (secim) {
                     case 1:
@@ -62,31 +62,26 @@ public class Main {
                         seciliSekil.ciz();
                         break;
                     case 2:
-                        LogUtil.log("Kare boyutunu girin: ");
-                        int kareBoyut = getIntInput(scanner);
+                        int kareBoyut = InputManager.readInt("Kare boyutunu girin: ");
                         seciliSekil = new Kare(kareBoyut, sembol);
                         sekilListesi.add(seciliSekil);
                         seciliSekil.ciz();
                         break;
                     case 3:
-                        LogUtil.log("Dikdörtgen genişliğini girin: ");
-                        int genislik = getIntInput(scanner);
-                        LogUtil.log("Dikdörtgen yüksekliğini girin: ");
-                        int yukseklik = getIntInput(scanner);
+                        int genislik = InputManager.readInt("Dikdörtgen genişliğini girin: ");
+                        int yukseklik = InputManager.readInt("Dikdörtgen yüksekliğini girin: ");
                         seciliSekil = new Dikdortgen(genislik, yukseklik, sembol);
                         sekilListesi.add(seciliSekil);
                         seciliSekil.ciz();
                         break;
                     case 4:
-                        LogUtil.log("Üçgenin yüksekliğini girin:");
-                        int yukselik = getIntInput(scanner);
+                        int yukselik = InputManager.readInt("Üçgenin yüksekliğini girin: ");
                         seciliSekil = new Ucgen(yukselik, sembol);
                         sekilListesi.add(seciliSekil);
                         seciliSekil.ciz();
                         break;
                     case 5:
-                        LogUtil.log("Dairenin çapını girin: ");
-                        int cap = getIntInput(scanner);
+                        int cap = InputManager.readInt("Dairenin çapını girin: ");
                         seciliSekil = new Daire(cap, sembol);
                         sekilListesi.add(seciliSekil);
                         seciliSekil.ciz();
@@ -96,11 +91,10 @@ public class Main {
                         break;
                     case 7:
                         sekilListesi.clear();
-                        LogUtil.log("Şekil listesi sıfırlandı.");
+                        OutputManager.print("Şekil listesi sıfırlandı.");
                         break;
                     case 8:
-                        System.out.print("Yeni sembolü girin: ");
-                        sembol = scanner.next().charAt(0);
+                        sembol = InputManager.readChar("Yeni sembolü girin: ");
                         if (seciliSekil != null) {
                             seciliSekil.sembolDegistir(sembol);
                             seciliSekil.ciz();
@@ -108,34 +102,46 @@ public class Main {
                         break;
                     case 9:
                         try {
-                            OkumaYazma.dosyadanSekilleriOku(java_calismalarim, sekilListesi);
-
+                            OkumaYazma.dosyadanSekilleriJsonOku(java_calismalarim, sekilListesi);
                         } catch (Exception e) {
-                            LogUtil.log("Dosyadan okuma işlemi başarısız oldu: " + e.getMessage());
+                            OutputManager.print("Dosyadan okuma işlemi başarısız oldu: " + e.getMessage());
                         }
                         break;
                     case 10:
                         try {
-                            OkumaYazma.listeyiDosyayaYaz(java_calismalarim, sekilListesi);
+                            OutputManager.print("1: Şekilleri düz Json dosyasına yaz");
+                            OutputManager.print("2: Şekilleri düz dosyasına yaz");
+                            int yazmaSecim = InputManager.readInt("Seçiminiz: ");
+
+                            if (yazmaSecim == 1) {
+                                OkumaYazma.listeyiDosyayaJsonYaz("sekillerJson.txt", sekilListesi);
+                                OutputManager.print("Şekiller Json metin dosyasına yazıldı.");
+                            } else if (yazmaSecim == 2) {
+                                FileManager.listeyiDosyayaYaz("sekiller.txt", sekilListesi);
+                                OutputManager.print("Şekiller düz dosyasına yazıldı.");
+                            } else {
+                                OutputManager.print("Geçersiz seçenek. Tekrar deneyin.");
+                            }
                         } catch (Exception e) {
-                            LogUtil.log("Dosyaya yazma işlemi başarısız oldu: " + e.getMessage());
+                            OutputManager.print("Dosyaya yazma işlemi başarısız oldu: " + e.getMessage());
                         }
                         break;
                     case 11:
                         sekilListesi.clear();
-                        LogUtil.log("Şekil listesi sıfırlandı.");
+                        OutputManager.print("Şekil listesi sıfırlandı.");
                         break;
                     case 12:
-                        LogUtil.log("Programdan çıkılıyor...");
+                        OutputManager.print("Programdan çıkılıyor...");
+                        InputManager.closeScanner();
                         return;
                     default:
-                        LogUtil.log("Geçersiz seçenek. Tekrar deneyin.");
+                        OutputManager.print("Geçersiz seçenek. Tekrar deneyin.");
                 }
             } catch (InputMismatchException e) {
-                LogUtil.log("Geçersiz giriş. Lütfen bir sayı girin.");
-                scanner.nextLine(); // Scanner'ı sıfırlamak için
+                OutputManager.print("Geçersiz giriş. Lütfen bir sayı girin.");
+                InputManager.readInt("");
             } catch (Exception e) {
-                LogUtil.log("Beklenmeyen bir hata oluştu: " + e.getMessage());
+                OutputManager.print("Beklenmeyen bir hata oluştu: " + e.getMessage());
             }
         }
     }
@@ -149,18 +155,7 @@ public class Main {
             toplamCevre += sekil.cevreHesapla();
         }
 
-        LogUtil.log("Toplam alan: " + toplamAlan);
-        LogUtil.log("Toplam çevre: " + toplamCevre);
-    }
-
-    private static int getIntInput(Scanner scanner) {
-        while (true) {
-            try {
-                return scanner.nextInt();
-            } catch (InputMismatchException e) {
-                LogUtil.log("Geçersiz giriş. Lütfen bir tamsayı girin.");
-                scanner.nextLine(); // Hatalı girdiyi temizleyin
-            }
-        }
+        OutputManager.print("Toplam alan: " + toplamAlan);
+        OutputManager.print("Toplam çevre: " + toplamCevre);
     }
 }

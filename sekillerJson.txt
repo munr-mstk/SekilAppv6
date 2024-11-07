@@ -1,0 +1,1 @@
+[{"type":"Kare","boyut":24,"sembol":"*"}]

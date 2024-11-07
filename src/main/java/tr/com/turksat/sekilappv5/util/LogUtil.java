@@ -1,4 +1,4 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.util;
 
 public class LogUtil {
 

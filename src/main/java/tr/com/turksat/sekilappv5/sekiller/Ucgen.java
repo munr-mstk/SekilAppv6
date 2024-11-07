@@ -1,6 +1,9 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.sekiller;
 
-public class Ucgen implements Sekil{
+import tr.com.turksat.sekilappv5.parser.JsonParser;
+import tr.com.turksat.sekilappv5.util.LogUtil;
+
+public class Ucgen implements Sekil {
 
     private String type="Ucgen";
     private int yukseklik; // Üçgenin yüksekliği

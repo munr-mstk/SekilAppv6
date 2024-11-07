@@ -1,6 +1,8 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.sekiller;
 
 
+import tr.com.turksat.sekilappv5.parser.JsonParser;
+import tr.com.turksat.sekilappv5.util.LogUtil;
 
 public class Daire implements Sekil {
     private String type = "Daire"; // Şeklin tipi (Daire)

@@ -1,6 +1,12 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.parser;
 
 import com.google.gson.*;
+import tr.com.turksat.sekilappv5.sekiller.Sekil;
+import tr.com.turksat.sekilappv5.sekiller.Daire;
+import tr.com.turksat.sekilappv5.sekiller.Dikdortgen;
+import tr.com.turksat.sekilappv5.sekiller.Kare;
+import tr.com.turksat.sekilappv5.sekiller.Ucgen;
+
 import java.io.*;
 import java.util.*;
 

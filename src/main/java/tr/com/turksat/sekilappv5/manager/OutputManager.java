@@ -1,4 +1,4 @@
-package tr.com.turksat.sekilappv5;
+package tr.com.turksat.sekilappv5.manager;
 
 public class OutputManager {
     public static void print(String message) {
