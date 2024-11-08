@@ -5,14 +5,14 @@ import tr.com.turksat.sekilappv5.util.LogUtil;
 
 public class Ucgen implements Sekil {
 
-    private String type="Ucgen";
+    private String type="Üçgen";
     private int yukseklik;
     private char sembol;
     private static final char DEFAULT_SYMBOL = '*';
 
     public Ucgen(int yukseklik, char sembol) {
-        this.yukseklik = yukseklik; // Yüksekliği ayarla
-        this.sembol = sembol == 0 ? DEFAULT_SYMBOL : sembol; // Sembolü ayarla, eğer sıfır ise varsayılan sembolü kullan
+        this.yukseklik = yukseklik;
+        this.sembol = sembol == 0 ? DEFAULT_SYMBOL : sembol;
     }
 
     @Override
@@ -23,36 +23,36 @@ public class Ucgen implements Sekil {
     @Override
     public void ciz() {
         for (int i = 0; i < yukseklik; i++) {
-            // Boşlukları yazdır
+
             for (int j = 0; j < yukseklik - i - 1; j++) {
-                System.out.print("  "); // Üst kısımda boşluk bırak
+                System.out.print("  ");
             }
-            // Üçgenin sembollerini yazdır
+
             for (int j = 0; j < 2 * i + 1; j++) {
-                System.out.print(sembol + " "); // Sembolü yazdır
+                System.out.print(sembol + " ");
             }
-            System.out.println(); // Satır sonu
+            System.out.println();
         }
-        // Üçgenin alanını ve çevresini logla
+
         LogUtil.log("Üçgen alanı: " + alanHesapla());
         LogUtil.log("Üçgen çevresi: " + cevreHesapla());
     }
 
     @Override
     public void sembolDegistir(char yeniSembol) {
-        this.sembol = yeniSembol; // Yeni sembolü ayarla
+        this.sembol = yeniSembol;
     }
 
     @Override
     public double alanHesapla() {
-        int taban = 2 * (yukseklik - 1) + 1; // Üçgenin tabanı
-        return (taban * yukseklik) / 2.0; // Alan hesaplama
+        int taban = 2 * (yukseklik - 1) + 1;
+        return (taban * yukseklik) / 2.0;
     }
 
     @Override
     public double cevreHesapla() {
-        int taban = 2 * (yukseklik - 1) + 1; // Üçgenin tabanı
-        // Çevre = taban + 2 * (kenar uzunluğu) formülü ile hesaplanır
+        int taban = 2 * (yukseklik - 1) + 1;
+
         return taban + 2 * Math.sqrt(Math.pow(taban / 2.0, 2) + Math.pow(yukseklik, 2));
     }
 

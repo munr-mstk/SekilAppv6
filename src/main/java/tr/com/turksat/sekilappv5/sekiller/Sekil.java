@@ -42,7 +42,7 @@ public interface Sekil {
             return null;
         }
     }
-    public static Sekil fromString(String line) {
+     static Sekil fromString(String line) {
         try {
             String[] parts = line.split(", ");
             if (parts[0].contains("Kare")) {
@@ -58,7 +58,7 @@ public interface Sekil {
                 int cap = Integer.parseInt(parts[1].split(": ")[1]);
                 char sembol = parts[2].split(": ")[1].charAt(0);
                 return new Daire(cap, sembol);
-            } else if (parts[0].contains("Ucgen")) {
+            } else if (parts[0].contains("Üçgen")) {
                 int yukseklik = Integer.parseInt(parts[1].split(": ")[1]);
                 char sembol = parts[2].split(": ")[1].charAt(0);
                 return new Ucgen(yukseklik, sembol);
