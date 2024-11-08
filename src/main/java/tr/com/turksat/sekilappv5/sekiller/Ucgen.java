@@ -6,8 +6,8 @@ import tr.com.turksat.sekilappv5.util.LogUtil;
 public class Ucgen implements Sekil {
 
     private String type="Ucgen";
-    private int yukseklik; // Üçgenin yüksekliği
-    private char sembol; // Üçgeni temsil eden sembol
+    private int yukseklik;
+    private char sembol;
     private static final char DEFAULT_SYMBOL = '*';
 
     public Ucgen(int yukseklik, char sembol) {

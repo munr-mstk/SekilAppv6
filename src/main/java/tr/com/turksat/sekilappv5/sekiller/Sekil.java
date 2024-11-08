@@ -8,11 +8,12 @@ import tr.com.turksat.sekilappv5.util.LogUtil;
 public interface Sekil {
 
 
-
-
     void ciz();
+
     void sembolDegistir(char yeniSembol);
+
     double alanHesapla();
+
     double cevreHesapla();
 
     String toJson(); // JSON formatında döndür
@@ -41,35 +42,35 @@ public interface Sekil {
             return null;
         }
     }
-
-    static Sekil fromString(String sekilStr) {
+    public static Sekil fromString(String line) {
         try {
-            String[] parts = sekilStr.split(", ");
-            String type = parts[0].trim();
-            String values = parts[1].trim();
-
-            switch (type) {
-                case "Kare":
-                    int boyut = Integer.parseInt(values.split(":")[1].trim());
-                    return new Kare(boyut, '*');
-                case "Dikdortgen":
-                    String[] dimensions = values.split(":")[1].trim().split(",");
-                    int genislik = Integer.parseInt(dimensions[0].trim());
-                    int yukseklik = Integer.parseInt(dimensions[1].trim());
-                    return new Dikdortgen(genislik, yukseklik, '*');
-                case "Daire":
-                    int cap = Integer.parseInt(values.split(":")[1].trim());
-                    return new Daire(cap, '*');
-                case "Üçgen":
-                    int yukseklikUcgen = Integer.parseInt(values.split(":")[1].trim());
-                    return new Ucgen(yukseklikUcgen, '*');
-                default:
-                    LogUtil.log("Geçersiz şekil tipi: " + type);
+            String[] parts = line.split(", ");
+            if (parts[0].contains("Kare")) {
+                int boyut = Integer.parseInt(parts[1].split(": ")[1]);
+                char sembol = parts[2].split(": ")[1].charAt(0);
+                return new Kare(boyut, sembol);
+            } else if (parts[0].contains("Dikdortgen")) {
+                int genislik = Integer.parseInt(parts[1].split(": ")[1]);
+                int yukseklik = Integer.parseInt(parts[2].split(": ")[1]);
+                char sembol = parts[3].split(": ")[1].charAt(0);
+                return new Dikdortgen(genislik, yukseklik, sembol);
+            } else if (parts[0].contains("Daire")) {
+                int cap = Integer.parseInt(parts[1].split(": ")[1]);
+                char sembol = parts[2].split(": ")[1].charAt(0);
+                return new Daire(cap, sembol);
+            } else if (parts[0].contains("Ucgen")) {
+                int yukseklik = Integer.parseInt(parts[1].split(": ")[1]);
+                char sembol = parts[2].split(": ")[1].charAt(0);
+                return new Ucgen(yukseklik, sembol);
+            } else {
+                LogUtil.log("Hatalı veya tanımlanamayan satır atlandı: " + line);
+                return null;
             }
         } catch (Exception e) {
-            LogUtil.log("Hata oluştu: " + e.getMessage() + " için satır: " + sekilStr);
+            LogUtil.log("Hata oluştu: " + e.getMessage() + " için satır: " + line);
+            return null;
         }
-
-        return null;
     }
+
+
 }

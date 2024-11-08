@@ -1,1 +1,1 @@
-[{"type":"Kare","boyut":24,"sembol":"*"}]
+[{"type":"Ucgen","yukseklik":81,"sembol":"*"},{"type":"Dikdortgen","genislik":59,"yukseklik":4,"sembol":"*"},{"type":"Daire","cap":42,"sembol":"*"},{"type":"Kare","boyut":3,"sembol":"*"},{"type":"Ucgen","yukseklik":6,"sembol":"*"},{"type":"Ucgen","yukseklik":6,"sembol":"*"},{"type":"Daire","cap":900,"sembol":"*"},{"type":"Kare","boyut":3,"sembol":"*"},{"type":"Kare","boyut":3,"sembol":"*"}]

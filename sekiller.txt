@@ -1,1 +1,9 @@
-Daire, Çap: 27, Sembol: *
+Kare, boyut: 33, sembol: *
+Ucgen, Yükseklik: 13, Sembol: *
+Dikdortgen, Genişlik: 59, Yükseklik: 4, Sembol: *
+Daire, Çap: 42, Sembol: *
+Kare, boyut: 3, sembol: *
+Daire, Çap: 900, Sembol: *
+Kare, boyut: 3, sembol: *
+Kare, boyut: 3, sembol: *
+Daire, Çap: 23, Sembol: *

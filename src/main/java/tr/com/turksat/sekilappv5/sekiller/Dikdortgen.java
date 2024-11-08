@@ -31,7 +31,7 @@ public class Dikdortgen implements Sekil {
      */
     @Override
     public String toString() {
-        return "Tip: " + type + ", Genişlik: " + genislik + ", Yükseklik: " + yukseklik + ", Sembol: " + sembol;
+        return  type + ", Genişlik: " + genislik + ", Yükseklik: " + yukseklik + ", Sembol: " + sembol;
     }
 
     /**

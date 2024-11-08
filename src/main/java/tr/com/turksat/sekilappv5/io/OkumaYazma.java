@@ -8,13 +8,14 @@ import tr.com.turksat.sekilappv5.util.LogUtil;
 
 import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 
 public class OkumaYazma {
     private static double toplamAlan = 0;
     private static double toplamCevre = 0;
     private static final Gson gson = new Gson();
 
-    // JSON formatında dosyadan okuma
+
     public static void dosyadanSekilleriJsonOku(String dosyaAdi, List<Sekil> sekilListesi) {
         try {
             File file = new File(dosyaAdi);
@@ -33,7 +34,7 @@ public class OkumaYazma {
         }
     }
 
-    // JSON formatında listeyi dosyaya yazma
+
     public static void listeyiDosyayaJsonYaz(String dosyaAdi, List<Sekil> sekilListesi) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(dosyaAdi))) {
             String json = gson.toJson(sekilListesi);
@@ -44,29 +45,30 @@ public class OkumaYazma {
         }
     }
 
-
-    public static void listeyiDosyayaNormalYaz(String dosyaAdi, List<Sekil> sekilListesi) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(dosyaAdi))) {
-            for (Sekil sekil : sekilListesi) {
-                bw.write(sekil.toString());
-                bw.newLine();
-            }
-            LogUtil.log("Şekil listesi başarıyla normal formatta dosyaya kaydedildi.");
-        } catch (IOException e) {
-            LogUtil.log("Dosya yazılırken hata oluştu: " + e.getMessage());
-        }
-    }
-
-
     public static void dosyadanSekilleriNormalOku(String dosyaAdi, List<Sekil> sekilListesi) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(dosyaAdi))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                Sekil sekil = Sekil.fromString(line);
-                sekilListesi.add(sekil);
+        try {
+
+            File file = new File(dosyaAdi);
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                Sekil yeniSekil = Sekil.fromString(line);
+
+                if (yeniSekil != null) {
+                    sekilListesi.add(yeniSekil);
+                    toplamAlan += yeniSekil.alanHesapla();
+                    toplamCevre += yeniSekil.cevreHesapla();
+
+                    System.out.println(yeniSekil);
+                } else {
+
+                    LogUtil.log("Hatalı veya tanımlanamayan satır atlandı: " + line);
+                }
             }
-            LogUtil.log("Şekiller başarıyla normal formatta dosyadan okundu.");
-        } catch (IOException e) {
+            LogUtil.log("Şekiller başarıyla düz dosyadan okundu ve listeye eklendi.");
+            scanner.close();
+        } catch (Exception e) {
             LogUtil.log("Dosya okunurken hata oluştu: " + e.getMessage());
         }
     }

@@ -47,9 +47,9 @@ public class Main {
                 OutputManager.print("6: Toplam alan ve çevre bilgilerini göster");
                 OutputManager.print("7: Alan ve çevre hesaplamalarını sıfırla");
                 OutputManager.print("8: Yeni Sembol ");
-                OutputManager.print("9: Json Şekilleri dosyadan oku ve listeye ekle");
-                OutputManager.print("10: Şekilleri dosyadan oku ve listeye ekle");
-                OutputManager.print("11: Listedeki Json şekilleri dosyaya yaz");
+                OutputManager.print("9: Şekilleri dosyadan oku");
+                OutputManager.print("10:Şekilleri dosyalara kaydet");
+                OutputManager.print("11: Listeyi temizle");
                 OutputManager.print("12: Çıkış");
                 OutputManager.printWithPrompt("Seçiminiz: ");
 
@@ -101,12 +101,23 @@ public class Main {
                         }
                         break;
                     case 9:
-                        try {
-                            OkumaYazma.dosyadanSekilleriJsonOku(java_calismalarim, sekilListesi);
-                        } catch (Exception e) {
-                            OutputManager.print("Dosyadan okuma işlemi başarısız oldu: " + e.getMessage());
+                        OutputManager.print("Seçenek 1 (JSON) veya Seçenek 2 (Düz dosya) okuma işlemi başlıyor...");
+
+                        int okumaSecim = InputManager.readInt("Seçiminizi yapın (1: JSON, 2: Düz dosya): ");
+
+                        if (okumaSecim == 1) {
+                            OutputManager.print("JSON formatında okuma başlıyor.");
+                            OkumaYazma.dosyadanSekilleriJsonOku("sekillerJson.txt", sekilListesi);
+                            OutputManager.print("Şekiller JSON dosyasından başarıyla okundu.");
+                        } else if (okumaSecim == 2) {
+                            OutputManager.print("Düz dosya formatında okuma başlıyor.");
+                            OkumaYazma.dosyadanSekilleriNormalOku("sekiller.txt", sekilListesi);
+                            OutputManager.print("Şekiller düz dosyadan başarıyla okundu.");
+                        } else {
+                            OutputManager.print("Geçersiz seçenek. Lütfen 1 veya 2 giriniz.");
                         }
                         break;
+
                     case 10:
                         try {
                             OutputManager.print("1: Şekilleri düz Json dosyasına yaz");

@@ -25,21 +25,6 @@ public class FileManager {
         this.format = format;
     }
 
-    public static void dosyadanSekilleriOku(String dosyaYolu, List<Sekil> sekilListesi) throws IOException {
-        if (format == Format.JSON) {
-            OkumaYazma.dosyadanSekilleriJsonOku(dosyaYolu, sekilListesi);
-        } else {
-            try (BufferedReader reader = new BufferedReader(new FileReader(dosyaYolu))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    Sekil sekil = Sekil.fromString(line);
-                    sekilListesi.add(sekil);
-                }
-            } catch (IOException e) {
-                throw new IOException("Dosyadan okuma sırasında hata oluştu: " + e.getMessage(), e);
-            }
-        }
-    }
 
     public static void listeyiDosyayaYaz(String dosyaYolu, List<Sekil> sekilListesi) throws IOException {
         if (format == Format.JSON) {
@@ -47,7 +32,6 @@ public class FileManager {
         } else {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(dosyaYolu))) {
                 for (Sekil sekil : sekilListesi) {
-                    // Şekli normal formatta yazma işlemi yapılacak.
                     writer.write(sekil.toString());
                     writer.newLine();
                 }
