@@ -1,5 +1,3 @@
-Kare, boyut: 3, sembol: *
-Kare, boyut: 2, sembol: *
-Dikdortgen, Genişlik: 15, Yükseklik: 3, Sembol: *
-Üçgen, Yükseklik: 29, Sembol: *
-Daire, Çap: 17, Sembol: *
+Kare, boyut: 3, sembol: /
+Kare, boyut: 3, sembol: /
+Üçgen, Yükseklik: 46, Sembol: /

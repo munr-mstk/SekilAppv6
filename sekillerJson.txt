@@ -1,1 +1,1 @@
-[{"type":"Kare","boyut":3,"sembol":"*"},{"type":"Kare","boyut":10,"sembol":"*"},{"type":"Dikdortgen","genislik":4,"yukseklik":9,"sembol":"*"},{"type":"Üçgen","yukseklik":42,"sembol":"*"},{"type":"Daire","cap":40,"sembol":"*"}]
+[{"type":"Kare","boyut":3,"sembol":"/"}]
