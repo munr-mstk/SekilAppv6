@@ -1,1 +1,1 @@
-[{"type":"Kare","boyut":3,"sembol":"/"}]
+[{"type":"Kare","boyut":34,"sembol":"*"},{"type":"Üçgen","yukseklik":22,"sembol":"*"}]

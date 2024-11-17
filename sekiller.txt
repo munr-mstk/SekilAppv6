@@ -1,3 +1,6 @@
-Kare, boyut: 3, sembol: /
-Kare, boyut: 3, sembol: /
-Üçgen, Yükseklik: 46, Sembol: /
+Kare, boyut: 34, sembol: *
+Üçgen, Yükseklik: 22, Sembol: *
+Kare, boyut: 34, sembol: *
+Üçgen, Yükseklik: 22, Sembol: *
+Üçgen, Yükseklik: 44, Sembol: *
+Daire, Çap: 46, Sembol: *

@@ -1,0 +1,4 @@
+Kare, boyut: 19, sembol: /
+Daire, boyut: 14, sembol: #
+Ucgen, yukseklik: 35,sembol:*
+

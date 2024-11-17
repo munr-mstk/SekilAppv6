@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class InputManager {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    public static  Scanner scanner = new Scanner(System.in);
     private static final Pattern SELECTION_PATTERN = Pattern.compile("^[1-9]$|^1[0-2]$");
     private static final Pattern SYMBOL_PATTERN = Pattern.compile("^[*#+/]$");
 
@@ -53,6 +53,18 @@ public class InputManager {
 
     public static void closeScanner() {
         scanner.close();
+    }
+    public static int readValidatedSelection(String prompt) {
+        System.out.print(prompt);
+        String input = scanner.nextLine();
+
+        while (!SELECTION_PATTERN.matcher(input).matches()) {
+            System.out.println("Geçersiz seçim. Lütfen 1 ile 12 arasında bir sayı girin.");
+            System.out.print(prompt);
+            input = scanner.nextLine();
+        }
+
+        return Integer.parseInt(input);
     }
 
     public static String readFormatChoice() {

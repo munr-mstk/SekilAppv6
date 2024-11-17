@@ -31,7 +31,7 @@ public interface Sekil {
                     return gson.fromJson(json, Dikdortgen.class);
                 case "Daire":
                     return gson.fromJson(json, Daire.class);
-                case "Üçgen":
+                case "Ucgen":
                     return gson.fromJson(json, Ucgen.class);
                 default:
                     LogUtil.log("Geçersiz şekil tipi: " + type);

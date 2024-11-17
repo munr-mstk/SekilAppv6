@@ -12,7 +12,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.InputMismatchException;
+
 
 public class Main {
     private static String java_calismalarim;
@@ -51,7 +51,7 @@ public class Main {
                 OutputManager.print("12: Çıkış");
                 OutputManager.printWithPrompt("Seçiminiz: ");
 
-                int secim = InputManager.readInt("");
+                int secim = InputManager.readValidatedSelection("");
 
                 switch (secim) {
                     case 1:
@@ -132,9 +132,6 @@ public class Main {
                     default:
                         OutputManager.print("Geçersiz seçim. Lütfen 1 ile 12 arasında bir sayı girin.");
                 }
-            } catch (InputMismatchException e) {
-                OutputManager.print("Geçersiz giriş. Lütfen geçerli bir sayı girin.");
-                InputManager.clearBuffer();
             } catch (Exception e) {
                 OutputManager.print("Beklenmeyen bir hata oluştu: " + e.getMessage());
             }
